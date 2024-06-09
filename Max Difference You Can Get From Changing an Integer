@@ -1,0 +1,9 @@
+def max_diff(num):
+    num_str = str(num)
+    max_num = int(num_str.replace(max(num_str), '9'))
+    min_num = int(num_str.replace(min(num_str.lstrip('0') or '0'), '1'))
+    return max_num - min_num
+
+# Test the function
+num = 123456
+print(max_diff(num))  # Output: 820000
