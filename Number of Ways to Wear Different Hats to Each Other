@@ -1,0 +1,24 @@
+MOD = 10**9 + 7
+
+def numberWays(hats):
+    n = len(hats)
+    people_hats = [set(h) for h in hats]
+    all_hats = set(h for person in people_hats for h in person)
+    dp = [0] * (1 << n)
+    dp[0] = 1
+
+    for hat in all_hats:
+        new_dp = dp[:]
+        for mask in range(1 << n):
+            for i in range(n):
+                if hat in people_hats[i] and not mask & (1 << i):
+                    new_dp[mask | (1 << i)] += dp[mask]
+                    new_dp[mask | (1 << i)] %= MOD
+        dp = new_dp
+
+    return dp[(1 << n) - 1]
+
+# Example Usage
+hats_preferences = [[1, 2, 3], [2, 3, 5], [5, 6]]
+ways_to_wear_hats = numberWays(hats_preferences)
+print(ways_to_wear_hats)
