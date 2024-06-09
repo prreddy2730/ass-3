@@ -1,0 +1,14 @@
+def count_elements(arr):
+    count_dict = {}
+    for num in arr:
+        count_dict[num] = count_dict.get(num, 0) + 1
+
+    count = 0
+    for key in count_dict:
+        if key + 1 in count_dict:
+            count += count_dict[key]
+
+    return count
+arr = [1, 2, 3, 2, 4, 5, 7, 6, 8]
+result = count_elements(arr)
+print(result)  # Output: 4
